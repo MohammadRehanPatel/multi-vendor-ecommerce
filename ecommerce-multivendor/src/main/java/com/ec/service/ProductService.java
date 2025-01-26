@@ -22,7 +22,7 @@ public interface ProductService {
                                  Integer minPrice, Integer maxPrice, Integer minDiscount,
                                  String sort, String stock, Integer pageNumber);
 
-    List<Product> searchProducts();
+    List<Product> searchProducts(String query);
 
     List<Product> getProductBySellerId(Long sellerId);
 

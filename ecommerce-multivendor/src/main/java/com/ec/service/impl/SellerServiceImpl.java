@@ -39,10 +39,10 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller createSeller(Seller seller) throws Exception {
+    public Seller createSeller(Seller seller) throws SellerException {
         Seller sellerExist =sellerRepository.findByEmail(seller.getEmail());
         if(sellerExist!=null){
-            throw new Exception("Seller already exists");
+            throw new SellerException("Seller already exists");
         }
         Address savedAddress = addressRepository.save(seller.getPickupAddress());
         Seller newSeller = new Seller();
@@ -66,7 +66,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller getSellerByEmail(String email) throws Exception {
+    public Seller getSellerByEmail(String email) throws SellerException {
         Seller seller = sellerRepository.findByEmail(email);
 
         if(seller==null){
@@ -81,7 +81,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller updateSeller(Long id, Seller seller) throws Exception {
+    public Seller updateSeller(Long id, Seller seller) throws SellerException {
         Seller existingSeller = this.getSellerById(id);
 
         if(seller.getSellerName() != null){
@@ -135,13 +135,13 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void deleteSeller(Long id) throws Exception {
+    public void deleteSeller(Long id) throws SellerException {
         Seller seller = getSellerById(id);
         sellerRepository.delete(seller);
     }
 
     @Override
-    public Seller verifyEmail(String email, String otp) throws Exception {
+    public Seller verifyEmail(String email, String otp) throws SellerException {
         Seller seller = getSellerByEmail(email);
         seller.setEmailVerified(true);
 
@@ -149,7 +149,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller updateSellerAccountStatus(Long sellerId, AccountStatus status) throws Exception {
+    public Seller updateSellerAccountStatus(Long sellerId, AccountStatus status) throws SellerException {
         Seller seller = getSellerById(sellerId);
         seller.setAccountStatus(status);
 

@@ -23,11 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public Product createProduct(CreateProductRequest req, Seller seller) throws IllegalAccessException {
@@ -152,12 +156,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchProducts() {
-        return null;
+    public List<Product> searchProducts(String query) {
+
+        return productRepository.searchProduct(query);
     }
 
     @Override
     public List<Product> getProductBySellerId(Long sellerId) {
-        return null;
+        return productRepository.findBySellerId(sellerId);
     }
 }
