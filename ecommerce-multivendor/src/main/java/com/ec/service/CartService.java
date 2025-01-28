@@ -12,9 +12,9 @@ public interface CartService {
             Product product ,
             String size,
             int quantity
-    );
+    ) throws IllegalArgumentException;
 
-    Cart findUserCart(User user);
+    Cart findUserCart(User user) throws IllegalArgumentException;
 
 
 }

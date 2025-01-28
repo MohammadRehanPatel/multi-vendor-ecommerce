@@ -77,9 +77,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
-    private int calculateDiscountPercentage(double mrpPrice, double sellingPrice) throws IllegalAccessException {
+    private int calculateDiscountPercentage(double mrpPrice, double sellingPrice)  {
         if(mrpPrice<0){
-            throw new IllegalAccessException("Actual price must be greaer than 0");
+            throw new IllegalArgumentException("Actual price must be greater than 0");
         }
         double discount = mrpPrice-sellingPrice;
         double discountPercentage = (discount/mrpPrice) *100;
