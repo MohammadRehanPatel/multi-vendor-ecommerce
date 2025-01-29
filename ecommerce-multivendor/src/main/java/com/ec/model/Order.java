@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @EqualsAndHashCode
 @Entity
 @Table(name = "orders")
