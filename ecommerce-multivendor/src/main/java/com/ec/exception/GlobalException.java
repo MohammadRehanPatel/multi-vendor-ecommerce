@@ -43,7 +43,17 @@ public class GlobalException {
     }
 
     @ExceptionHandler(OrderException.class)
-    public ResponseEntity<ErrorDetails> userExceptionHandler(OrderException e, WebRequest req){
+    public ResponseEntity<ErrorDetails> orderExceptionHandler(OrderException e, WebRequest req){
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setError(e.getMessage());
+        errorDetails.setDetails(req.getDescription(false));
+        errorDetails.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PaymentException.class)
+    public ResponseEntity<ErrorDetails> paymentExceptionHandler(PaymentException e, WebRequest req){
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setError(e.getMessage());
         errorDetails.setDetails(req.getDescription(false));

@@ -13,8 +13,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class PaymentOrder {
 
     @Id

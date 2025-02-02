@@ -12,6 +12,7 @@ import com.ec.response.ApiResponse;
 import com.ec.response.AuthResponse;
 import com.ec.service.AuthService;
 import com.ec.service.EmailService;
+import com.ec.service.SellerReportService;
 import com.ec.service.SellerService;
 import com.ec.service.impl.CustomUserServiceImpl;
 import com.ec.util.OtpUtil;
@@ -33,14 +34,17 @@ public class SellerController {
     private final CustomUserServiceImpl customUserService;
     private final EmailService emailService;
 
+    private final SellerReportService sellerReportService;
+
     public SellerController(SellerService sellerService, VerificationCodeRepository verificationCodeRepository, AuthService authService, JwtProvider jwtProvider,
-                            CustomUserServiceImpl customUserService, EmailService emailService) {
+                            CustomUserServiceImpl customUserService, EmailService emailService, SellerReportService sellerReportService) {
         this.sellerService = sellerService;
         this.verificationCodeRepository = verificationCodeRepository;
         this.authService = authService;
         this.jwtProvider = jwtProvider;
         this.customUserService = customUserService;
         this.emailService = emailService;
+        this.sellerReportService = sellerReportService;
     }
 
     @PostMapping("/login")
@@ -104,9 +108,9 @@ public class SellerController {
     public ResponseEntity<SellerReport> getSellerReport(
             @RequestHeader("Authorization") String jwt
     ) throws Exception{
-        String email = jwtProvider.getEmailFromJwtToken(jwt);
-        Seller seller = sellerService.getSellerByEmail(email);
-        SellerReport report = null;
+//        String email = jwtProvider.getEmailFromJwtToken(jwt);
+        Seller seller = sellerService.getSellerProfile(jwt);
+        SellerReport report = sellerReportService.getSellerReport(seller);
         return new ResponseEntity<>(report , HttpStatus.OK);
     }
 
