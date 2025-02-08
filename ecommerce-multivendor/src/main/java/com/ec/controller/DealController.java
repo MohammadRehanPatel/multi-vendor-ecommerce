@@ -40,7 +40,7 @@ public class DealController {
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("Deal Deleted!");
 
-        return new ResponseEntity<>(apiResponse,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(apiResponse,HttpStatus.NO_CONTENT);
     }
 
 }
