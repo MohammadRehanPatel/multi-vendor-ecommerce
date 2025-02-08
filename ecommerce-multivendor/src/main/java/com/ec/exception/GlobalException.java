@@ -79,6 +79,24 @@ public class GlobalException {
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(HomeCategoryException.class)
+    public ResponseEntity<ErrorDetails> couponExceptionHandler(HomeCategoryException e, WebRequest req){
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setError(e.getMessage());
+        errorDetails.setDetails(req.getDescription(false));
+        errorDetails.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+  @ExceptionHandler(DealException.class)
+    public ResponseEntity<ErrorDetails> dealExceptionHandler(DealException e, WebRequest req){
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setError(e.getMessage());
+        errorDetails.setDetails(req.getDescription(false));
+        errorDetails.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 
 
 
