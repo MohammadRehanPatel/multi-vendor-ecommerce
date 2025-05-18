@@ -1,5 +1,6 @@
-# multi-vendor-ecommerce
-#Customer Features:
+# Multi-vendor-ecommerce
+
+# Customer Features:
 
 ## Chatbot for Queries: An interactive chatbot to answer common customer queries about orders, products, and the cart.
 ## Product Management: View product lists, filter products by categories or price, and see detailed product descriptions.
