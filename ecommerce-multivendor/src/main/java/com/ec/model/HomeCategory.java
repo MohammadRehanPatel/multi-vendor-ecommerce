@@ -10,8 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-
 public class HomeCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

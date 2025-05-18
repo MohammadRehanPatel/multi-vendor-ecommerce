@@ -18,6 +18,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -25,13 +26,17 @@ import java.util.Set;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    private String apiSecret = "apiSecret";
-    private String apiKey = "apiKey";
-    private String stripeSecretKey = "stripeSecretKey";
-    private String stripeApiKey = "StripeapiKey";
+    @Value("${razorpay.api.secret}")
+    private String apiSecret;
+    @Value("${razorpay.api.key}")
+    private String apiKey;
 
-    private PaymentOrderRepository paymentOrderRepository;
-    private OrderRepository orderRepository;
+//    private String stripeSecretKey = "stripeSecretKey";
+    @Value("${stripe.api.key}") 
+    private String stripeApiKey;
+
+    private final PaymentOrderRepository paymentOrderRepository;
+    private final OrderRepository orderRepository;
 
     public PaymentServiceImpl(PaymentOrderRepository paymentOrderRepository, OrderRepository orderRepository) {
         this.paymentOrderRepository = paymentOrderRepository;
@@ -107,7 +112,9 @@ public class PaymentServiceImpl implements PaymentService {
             notify.put("email", true);
             paymentListRequest.put("notify", notify);
 
-            paymentListRequest.put("callback_url", "http://localhost:3000/payment-success/" + orderId);
+            paymentListRequest.put("reminder_enable",true);
+
+            paymentListRequest.put("callback_url", "http://localhost:/payment-success/" + orderId);
 
             paymentListRequest.put("callback_method", "get");
 
@@ -132,8 +139,8 @@ public class PaymentServiceImpl implements PaymentService {
         SessionCreateParams params = SessionCreateParams.builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl("http://localhost:3000/payment-success/" + orderId)
-                .setCancelUrl("http://localhost:3000/payment-cancel")
+                .setSuccessUrl("http://localhost:5173/payment-success/" + orderId)
+                .setCancelUrl("http://localhost:5173/payment-cancel")
                 .addLineItem(SessionCreateParams.LineItem.builder()
                         .setQuantity(1L)
                         .setPriceData(SessionCreateParams.LineItem.PriceData.builder()

@@ -37,7 +37,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviews);
     }
 
-    @PostMapping("/products/{productId{/reviews")
+    @PostMapping("/products/{productId}/reviews")
     public ResponseEntity<Review> writeReview(
             @RequestBody CreateReviewRequest req,
             @PathVariable Long productId,

@@ -6,8 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Data
-@EqualsAndHashCode
+import java.util.Objects;
+
+
 public class PaymentDetails {
 
     private String paymentId;
@@ -77,5 +78,17 @@ public class PaymentDetails {
         this.razorPaymentLinkStatus = razorPaymentLinkStatus;
         this.razorPaymentLinkIdZWSP = razorPaymentLinkIdZWSP;
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentDetails that = (PaymentDetails) o;
+        return Objects.equals(paymentId, that.paymentId) && Objects.equals(razorPaymentLinkId, that.razorPaymentLinkId) && Objects.equals(razorPaymentLinkReferenceId, that.razorPaymentLinkReferenceId) && Objects.equals(razorPaymentLinkStatus, that.razorPaymentLinkStatus) && Objects.equals(razorPaymentLinkIdZWSP, that.razorPaymentLinkIdZWSP) && status == that.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentId, razorPaymentLinkId, razorPaymentLinkReferenceId, razorPaymentLinkStatus, razorPaymentLinkIdZWSP, status);
     }
 }

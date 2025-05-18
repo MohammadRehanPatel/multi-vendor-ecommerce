@@ -8,11 +8,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+
 public class CartItem {
 
     @Id
@@ -111,5 +110,24 @@ public class CartItem {
         this.mrpPrice = mrpPrice;
         this.sellingPrice = sellingPrice;
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return quantity == cartItem.quantity &&
+                Objects.equals(id, cartItem.id) &&
+                Objects.equals(product, cartItem.product) &&
+                Objects.equals(size, cartItem.size) &&
+                Objects.equals(mrpPrice, cartItem.mrpPrice) &&
+                Objects.equals(sellingPrice, cartItem.sellingPrice) &&
+                Objects.equals(userId, cartItem.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, product, size, quantity, mrpPrice, sellingPrice, userId);
     }
 }

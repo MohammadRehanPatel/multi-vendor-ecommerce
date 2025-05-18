@@ -7,7 +7,11 @@ import com.ec.model.User;
 import com.ec.repository.CartItemRepository;
 import com.ec.repository.CartRepository;
 import com.ec.service.CartService;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -46,12 +50,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart findUserCart(User user)  {
         Cart cart = cartRepository.findByUserId(user.getId());
-
+        Set<CartItem> cartItems = new HashSet<>(cart.getCartItems());
         int totalPrice =0;
         int totalDiscountedPrice =0;
         int totalItem =0;
 
-        for (CartItem cartItem : cart.getCartItems()){
+        for (CartItem cartItem : cartItems){
             totalPrice+=cartItem.getMrpPrice();
             totalDiscountedPrice+=cartItem.getSellingPrice();
             totalItem+=cartItem.getQuantity();

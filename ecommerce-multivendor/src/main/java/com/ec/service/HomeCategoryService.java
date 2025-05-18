@@ -4,15 +4,16 @@ import com.ec.exception.HomeCategoryException;
 import com.ec.model.HomeCategory;
 
 import java.util.List;
+import java.util.Set;
 
 public interface HomeCategoryService {
 
     HomeCategory createHomeCategory(HomeCategory  homeCategory);
 
-    List<HomeCategory> createCategories(List<HomeCategory> homeCategories);
+    Set<HomeCategory> createCategories(Set<HomeCategory> homeCategories);
 
     HomeCategory updateCategory(HomeCategory homeCategory,Long id) throws HomeCategoryException;
-    List<HomeCategory> getAllCategories();
+    Set<HomeCategory> getAllCategories();
 
 
 }

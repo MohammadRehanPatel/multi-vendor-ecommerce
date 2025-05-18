@@ -10,7 +10,6 @@ import com.ec.request.CreateProductRequest;
 import com.ec.service.ProductService;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -73,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
         product.setImages(req.getImages());
         product.setMrpPrice(req.getMrpPrice());
         product.setSizes(req.getSizes());
-        product.setDiscountPrice(discountPercentage);
+        product.setDiscountPercent(discountPercentage);
         return productRepository.save(product);
     }
 

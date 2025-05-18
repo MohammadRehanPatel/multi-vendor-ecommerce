@@ -1,0 +1,23 @@
+.menu-item::before {
+    content: "";
+    position: absolute;
+    inset: calc(100% - 3px) 0 0 0;
+    /* background: #333333; */
+    transform: scaleX(0);
+    transition: transform 0.3s, translate 0s 0.3s;
+  }
+  .menu:hover .menu-item::before {
+    transform: scaleX(1);
+  }
+  .menu-item:hover::before {
+    transform: translateX(0);
+    transition: 0.3s;
+  }
+  .menu:hover .menu-item:hover ~ .menu-item::before {
+    transform: translateX(-100%);
+    transition: 0.2s 0.2s, scaleX(0) 0.4s;
+  }
+  .menu:hover .menu-item:has(~ .menu-item:hover)::before {
+    transform: translateX(100%);
+    transition: 0.2s 0.2s, scaleX(0) 0.4s;
+  }

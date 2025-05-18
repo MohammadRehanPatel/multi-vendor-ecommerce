@@ -9,10 +9,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Data
+import java.util.Objects;
 
-@EqualsAndHashCode
+@Entity
+
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -135,5 +135,17 @@ public class Seller {
 
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Seller seller = (Seller) o;
+        return isEmailVerified == seller.isEmailVerified && Objects.equals(id, seller.id) && Objects.equals(sellerName, seller.sellerName) && Objects.equals(mobile, seller.mobile) && Objects.equals(email, seller.email) && Objects.equals(password, seller.password) && Objects.equals(businessDetails, seller.businessDetails) && Objects.equals(bankDetails, seller.bankDetails) && Objects.equals(pickupAddress, seller.pickupAddress) && Objects.equals(GSTIN, seller.GSTIN) && role == seller.role && accountStatus == seller.accountStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sellerName, mobile, email, password, businessDetails, bankDetails, pickupAddress, GSTIN, role, isEmailVerified, accountStatus);
     }
 }

@@ -6,7 +6,10 @@ import com.ec.repository.HomeCategoryRepository;
 import com.ec.service.HomeCategoryService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class HomeCategoryServiceImpl implements HomeCategoryService {
@@ -23,17 +26,17 @@ public class HomeCategoryServiceImpl implements HomeCategoryService {
     }
 
     @Override
-    public List<HomeCategory> createCategories(List<HomeCategory> homeCategories) {
+    public Set<HomeCategory> createCategories(Set<HomeCategory> homeCategories) {
         if(homeCategoryRepository.findAll().isEmpty()){
-            return homeCategoryRepository.saveAll(homeCategories);
+            return (Set<HomeCategory>) homeCategoryRepository.saveAll(homeCategories);
         }
-        return homeCategoryRepository.findAll();
+        return  homeCategoryRepository.findAll().stream().collect(Collectors.toSet());
     }
 
     @Override
     public HomeCategory updateCategory(HomeCategory homeCategory, Long id) throws HomeCategoryException {
         HomeCategory updatedCategory = homeCategoryRepository
-                .findById(id).orElseThrow(()-> new HomeCategoryException("Home Chategory Not found"));
+                .findById(id).orElseThrow(()-> new HomeCategoryException("Home Category Not found"));
         if(homeCategory.getImage()!=null){
 
         updatedCategory.setImage(homeCategory.getImage());
@@ -48,7 +51,7 @@ public class HomeCategoryServiceImpl implements HomeCategoryService {
     }
 
     @Override
-    public List<HomeCategory> getAllCategories() {
-        return homeCategoryRepository.findAll();
+    public Set<HomeCategory> getAllCategories() {
+        return new HashSet<>(homeCategoryRepository.findAll());
     }
 }

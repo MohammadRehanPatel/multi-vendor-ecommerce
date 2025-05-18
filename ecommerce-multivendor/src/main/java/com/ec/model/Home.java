@@ -10,65 +10,67 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
-@Data
+
 public class Home {
 
-    private List<HomeCategory> grid;
-    private List<HomeCategory> shopByCategories;
-    private List<HomeCategory> electricCategories;
-    private List<HomeCategory> dealCategories;
-    private List<Deal> deals;
+    private Set<HomeCategory> grid;
+    private Set<HomeCategory> shopByCategories;
+    private Set<HomeCategory> electricCategories;
+    private Set<HomeCategory> dealCategories;
+    private Set<Deal> deals;
 
     public Home() {
     }
 
-    public List<HomeCategory> getGrid() {
+    public Set<HomeCategory> getGrid() {
         return grid;
     }
 
-    public void setGrid(List<HomeCategory> grid) {
+    public void setGrid(Set<HomeCategory> grid) {
         this.grid = grid;
     }
 
-    public List<HomeCategory> getShopByCategories() {
+    public Set<HomeCategory> getShopByCategories() {
         return shopByCategories;
     }
 
-    public void setShopByCategories(List<HomeCategory> shopByCategories) {
+    public void setShopByCategories(Set<HomeCategory> shopByCategories) {
         this.shopByCategories = shopByCategories;
     }
 
-    public List<HomeCategory> getElectricCategories() {
+    public Set<HomeCategory> getElectricCategories() {
         return electricCategories;
     }
 
-    public void setElectricCategories(List<HomeCategory> electricCategories) {
+    public void setElectricCategories(Set<HomeCategory> electricCategories) {
         this.electricCategories = electricCategories;
     }
 
-    public List<HomeCategory> getDealCategories() {
+    public Set<HomeCategory> getDealCategories() {
         return dealCategories;
     }
 
-    public void setDealCategories(List<HomeCategory> dealCategories) {
+    public void setDealCategories(Set<HomeCategory> dealCategories) {
         this.dealCategories = dealCategories;
     }
 
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public void setDeals(List<Deal> deals) {
+    public void setDeals(Set<Deal> deals) {
         this.deals = deals;
     }
 
-    public Home(List<HomeCategory> grid, List<HomeCategory> shopByCategories,
-                List<HomeCategory> electricCategories, List<HomeCategory> dealCategories, List<Deal> deals) {
+    public Set<Deal> getDeals() {
+        return deals;
+    }
+
+    public Home(Set<HomeCategory> grid, Set<HomeCategory> shopByCategories,
+                Set<HomeCategory> electricCategories, Set<HomeCategory> dealCategories, Set<Deal> deals) {
         this.grid = grid;
         this.shopByCategories = shopByCategories;
         this.electricCategories = electricCategories;
         this.dealCategories = dealCategories;
         this.deals = deals;
     }
+
 }

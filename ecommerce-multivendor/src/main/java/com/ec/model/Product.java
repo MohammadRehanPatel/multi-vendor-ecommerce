@@ -1,16 +1,13 @@
 package com.ec.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +17,7 @@ public class Product {
     private String description;
     private int mrpPrice;
     private int sellingPrice;
-    private int discountPrice;
+    private int discountPercent;
     private int quantity;
     private String color;
 
@@ -80,12 +77,12 @@ public class Product {
         this.sellingPrice = sellingPrice;
     }
 
-    public int getDiscountPrice() {
-        return discountPrice;
+    public int getDiscountPercent() {
+        return discountPercent;
     }
 
-    public void setDiscountPrice(int discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
     }
 
     public int getQuantity() {
@@ -163,14 +160,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String title, String description, int mrpPrice, int sellingPrice, int discountPrice, int quantity, String color, List<String> images, int numRatings,
+    public Product(Long id, String title, String description, int mrpPrice, int sellingPrice, int discountPercent, int quantity, String color, List<String> images, int numRatings,
                    Category category, Seller seller, LocalDateTime createdAt, String sizes, List<Review> reviews) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.mrpPrice = mrpPrice;
         this.sellingPrice = sellingPrice;
-        this.discountPrice = discountPrice;
+        this.discountPercent = discountPercent;
         this.quantity = quantity;
         this.color = color;
         this.images = images;

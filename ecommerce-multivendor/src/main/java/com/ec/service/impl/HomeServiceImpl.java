@@ -9,7 +9,9 @@ import com.ec.service.HomeService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,34 +24,34 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public Home createHomePageData(List<HomeCategory> allCategories) {
-        List<HomeCategory> gridCategories = allCategories.stream()
+    public Home createHomePageData(Set<HomeCategory> allCategories) {
+        Set<HomeCategory> gridCategories = allCategories.stream()
                 .filter(category-> category.getSection()== HomeCategorySection.GRID)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
 
-        List<HomeCategory> shopByCategories = allCategories.stream()
+        Set<HomeCategory> shopByCategories = allCategories.stream()
                 .filter(category-> category.getSection()== HomeCategorySection.SHOP_BY_CATEGORIES)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        List<HomeCategory> electricCategories = allCategories.stream()
+        Set<HomeCategory> electricCategories = allCategories.stream()
                 .filter(category-> category.getSection()== HomeCategorySection.ELECTRIC_CATEGORIES)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        List<HomeCategory> dealsCategories = allCategories.stream()
+        Set<HomeCategory> dealsCategories = allCategories.stream()
                 .filter(category-> category.getSection()== HomeCategorySection.DEALS)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        List<Deal> createdDeal= new ArrayList<>();
+        Set<Deal> createdDeal= new HashSet<>();
         if(dealRepository.findAll().isEmpty()){
-            List<Deal> deals=allCategories.stream()
+            Set<Deal> deals=allCategories.stream()
                     .filter(category-> category.getSection()==HomeCategorySection.DEALS)
                     .map(category-> new Deal(null,10,category))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
 
-            createdDeal=dealRepository.saveAll(deals);
+            createdDeal= (Set<Deal>) dealRepository.saveAll(deals);
         }else{
-            createdDeal=dealRepository.findAll();
+            createdDeal= new HashSet<>(dealRepository.findAll());
         }
 
         Home home = new Home();

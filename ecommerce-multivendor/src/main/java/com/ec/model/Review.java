@@ -10,12 +10,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -107,5 +105,17 @@ public class Review {
         this.product = product;
         this.user = user;
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return Double.compare(rating, review.rating) == 0 && Objects.equals(id, review.id) && Objects.equals(reviewText, review.reviewText) && Objects.equals(productImages, review.productImages) && Objects.equals(product, review.product) && Objects.equals(user, review.user) && Objects.equals(createdAt, review.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, reviewText, rating, productImages, product, user, createdAt);
     }
 }

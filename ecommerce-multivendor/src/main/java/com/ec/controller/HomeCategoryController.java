@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class HomeCategoryController {
@@ -24,16 +25,16 @@ public class HomeCategoryController {
 
     @PostMapping("/home/categories")
     public ResponseEntity<Home> createHomeCategories(
-            @RequestBody List<HomeCategory> homeCategories
+            @RequestBody Set<HomeCategory> homeCategories
             ){
-        List<HomeCategory> categories= homeCategoryService.createCategories(homeCategories);
+        Set<HomeCategory> categories= homeCategoryService.createCategories(homeCategories);
         Home home =homeService.createHomePageData(categories);
 
-        return new ResponseEntity<>(home, HttpStatus.CREATED);
+        return new ResponseEntity<>(home, HttpStatus.ACCEPTED);
     }
     @GetMapping("/admin/home-category")
-    public ResponseEntity<List<HomeCategory>> getHomeCategory() {
-        List<HomeCategory> categories= homeCategoryService.getAllCategories();
+    public ResponseEntity<Set<HomeCategory>> getHomeCategory() {
+        Set<HomeCategory> categories= homeCategoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 

@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Data
-@EqualsAndHashCode
+import java.util.Objects;
+
+
 public class BankDetails {
 
     private String accountNumber;
@@ -18,6 +19,18 @@ public class BankDetails {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.ifscCode = ifscCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        BankDetails that = (BankDetails) o;
+        return Objects.equals(accountNumber, that.accountNumber) && Objects.equals(accountHolderName, that.accountHolderName) && Objects.equals(ifscCode, that.ifscCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNumber, accountHolderName, ifscCode);
     }
 
     public BankDetails() {

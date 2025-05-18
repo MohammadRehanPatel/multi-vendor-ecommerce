@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class VerificationCode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

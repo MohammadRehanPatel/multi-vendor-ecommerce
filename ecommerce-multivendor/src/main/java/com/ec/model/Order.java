@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
 
-@EqualsAndHashCode
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -194,5 +193,17 @@ public class Order {
         this.paymentStatus = paymentStatus;
         this.orderDate = orderDate;
         this.deliverDate = deliverDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Double.compare(totalMrpPrice, order.totalMrpPrice) == 0 && totalItem == order.totalItem && Objects.equals(id, order.id) && Objects.equals(orderId, order.orderId) && Objects.equals(user, order.user) && Objects.equals(sellerId, order.sellerId) && Objects.equals(orderItems, order.orderItems) && Objects.equals(shippingAddress, order.shippingAddress) && Objects.equals(paymentDetails, order.paymentDetails) && Objects.equals(totalSellingPrice, order.totalSellingPrice) && Objects.equals(discount, order.discount) && orderStatus == order.orderStatus && paymentStatus == order.paymentStatus && Objects.equals(orderDate, order.orderDate) && Objects.equals(deliverDate, order.deliverDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, orderId, user, sellerId, orderItems, shippingAddress, paymentDetails, totalMrpPrice, totalSellingPrice, discount, orderStatus, totalItem, paymentStatus, orderDate, deliverDate);
     }
 }

@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@Entity
-@Data
+import java.util.Objects;
 
-@EqualsAndHashCode
+@Entity
+
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -74,6 +74,18 @@ public class Category {
         this.categoryId = categoryId;
         this.parentCategory = parentCategory;
         this.level = level;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(categoryId, category.categoryId) && Objects.equals(parentCategory, category.parentCategory) && Objects.equals(level, category.level);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, categoryId, parentCategory, level);
     }
 }
 

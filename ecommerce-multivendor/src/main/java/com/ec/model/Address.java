@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+
 public class Address {
 
     @Id
@@ -101,6 +100,18 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address1 = (Address) o;
+        return Objects.equals(id, address1.id) && Objects.equals(name, address1.name) && Objects.equals(locality, address1.locality) && Objects.equals(address, address1.address) && Objects.equals(city, address1.city) && Objects.equals(state, address1.state) && Objects.equals(pinCode, address1.pinCode) && Objects.equals(mobile, address1.mobile) && Objects.equals(user, address1.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, locality, address, city, state, pinCode, mobile, user);
     }
 
     public Address(Long id, String name, String locality, String address, String city, String state, String pinCode, String mobile, User user) {

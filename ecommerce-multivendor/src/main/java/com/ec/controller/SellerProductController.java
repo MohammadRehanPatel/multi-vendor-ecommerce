@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api/sellers/products")
+@RequestMapping("/sellers/products")
 public class SellerProductController {
 
     private final SellerService sellerService;

@@ -99,8 +99,8 @@ public class SellerController {
 
     @GetMapping("/profile")
     public ResponseEntity<Seller> getSellerByJwt(@RequestHeader("Authorization") String jwt) throws Exception{
+        System.out.println("Jwt "+jwt);
         Seller seller = sellerService.getSellerProfile(jwt);
-
         return new ResponseEntity<>(seller,HttpStatus.OK);
     }
 

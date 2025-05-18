@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+
 @Entity
 public class OrderItem {
     @Id
@@ -35,19 +32,6 @@ public class OrderItem {
     private Integer sellingPrice;
 
     private Long userId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return quantity == orderItem.quantity && Objects.equals(id, orderItem.id) && Objects.equals(order, orderItem.order) && Objects.equals(product, orderItem.product) && Objects.equals(size, orderItem.size) && Objects.equals(mrpPrice, orderItem.mrpPrice) && Objects.equals(sellingPrice, orderItem.sellingPrice) && Objects.equals(userId, orderItem.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, order, product, size, quantity, mrpPrice, sellingPrice, userId);
-    }
 
     public Long getId() {
         return id;
@@ -125,5 +109,17 @@ public class OrderItem {
         this.mrpPrice = mrpPrice;
         this.sellingPrice = sellingPrice;
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return quantity == orderItem.quantity && Objects.equals(id, orderItem.id) && Objects.equals(order, orderItem.order) && Objects.equals(product, orderItem.product) && Objects.equals(size, orderItem.size) && Objects.equals(mrpPrice, orderItem.mrpPrice) && Objects.equals(sellingPrice, orderItem.sellingPrice) && Objects.equals(userId, orderItem.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, order, product, size, quantity, mrpPrice, sellingPrice, userId);
     }
 }

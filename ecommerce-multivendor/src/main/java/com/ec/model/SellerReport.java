@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class SellerReport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

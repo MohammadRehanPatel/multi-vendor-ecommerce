@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/deals")
 public class DealController {
@@ -25,6 +27,12 @@ public class DealController {
         Deal createdDeal = dealService.createDeal(deal);
 
         return new ResponseEntity<>(createdDeal, HttpStatus.ACCEPTED);
+    }
+    @GetMapping()
+    public ResponseEntity<List<Deal>> getAllDeal(){
+        List<Deal> deals = dealService.getDeals();
+
+        return new ResponseEntity<>(deals, HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")

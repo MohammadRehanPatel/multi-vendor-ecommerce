@@ -13,9 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode
+
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -108,6 +106,9 @@ public class Coupon {
         this.usedByUsers = usedByUsers;
     }
 
+    public Coupon() {
+    }
+
     public Coupon(Long id, String code, double discountPercentage, LocalDate validityStartDate,
                   LocalDate validityEndDate, double minimumOrderValue, boolean isActive, Set<User> usedByUsers) {
         this.id = id;
@@ -119,4 +120,6 @@ public class Coupon {
         this.isActive = isActive;
         this.usedByUsers = usedByUsers;
     }
+
+
 }
